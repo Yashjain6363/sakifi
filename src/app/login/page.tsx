@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import { LoginForm } from "./LoginForm";
+import { AuthPageChrome } from "@/components/auth/AuthPageChrome";
 import { SITE_CONFIG } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "Log in",
-  description: `Sign in to ${SITE_CONFIG.name} with email.`,
+  description: `Sign in to ${SITE_CONFIG.name} with password or magic link.`,
 };
 
 type Props = {
@@ -21,12 +22,8 @@ export default function LoginPage({ searchParams }: Props) {
       : "/onboarding";
 
   return (
-    <main className="min-h-[100dvh] flex items-center justify-center px-4 py-20 bg-obsidian-DEFAULT relative overflow-hidden">
-      <div
-        className="absolute inset-0 bg-gradient-to-b from-rose-950/20 via-transparent to-violet-950/15 pointer-events-none"
-        aria-hidden
-      />
+    <AuthPageChrome variant="rose">
       <LoginForm initialError={err} nextPath={nextPath} />
-    </main>
+    </AuthPageChrome>
   );
 }

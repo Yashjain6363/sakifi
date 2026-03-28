@@ -28,6 +28,33 @@ export default async function OnboardingPage() {
     redirect("/login?next=/onboarding");
   }
 
+  const { data: profile, error: profileError } = await supabase
+    .from("profiles")
+    .select("onboarding")
+    .eq("id", user.id)
+    .maybeSingle();
+
+  const onboardingDone =
+    !profileError &&
+    profile?.onboarding &&
+    typeof profile.onboarding === "object" &&
+    profile.onboarding !== null &&
+    !Array.isArray(profile.onboarding) &&
+    "gender" in profile.onboarding;
+
+  if (onboardingDone) {
+    redirect("/?welcome=1");
+  }
+
+  const greetingName =
+    user.email?.split("@")[0] ||
+    (typeof user.user_metadata?.full_name === "string"
+      ? user.user_metadata.full_name.split(" ")[0]
+      : null) ||
+    (typeof user.user_metadata?.name === "string"
+      ? String(user.user_metadata.name).split(" ")[0]
+      : null);
+
   return (
     <main className="min-h-[100dvh] px-4 py-24 bg-obsidian-DEFAULT relative overflow-hidden">
       <div
@@ -36,7 +63,7 @@ export default async function OnboardingPage() {
       />
       <div className="relative max-w-3xl mx-auto text-center mb-10 space-y-2">
         <p className="text-xs font-semibold uppercase tracking-wider text-violet-300/90">
-          Welcome{user.email ? `, ${user.email.split("@")[0]}` : ""}
+          Welcome{greetingName ? `, ${greetingName}` : ""}
         </p>
         <h1 className="font-display text-3xl sm:text-4xl font-semibold text-white">
           Let Sakhi learn your rhythm

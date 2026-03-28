@@ -2,7 +2,7 @@
 
 import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
-import { ArrowRight, LogIn } from "lucide-react";
+import { ArrowRight, LogIn, UserPlus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { GlowOrb } from "@/components/shared/GlowOrb";
 import { GridBackground } from "@/components/shared/GridBackground";
@@ -102,12 +102,18 @@ export function Hero() {
             className="flex flex-col sm:flex-row items-center justify-center gap-4"
           >
             <Button asChild size="lg" className="group">
-              <a href="/login">
-                Log in with email
-                <LogIn
+              <a href="/signup">
+                Sign up free
+                <UserPlus
                   className="w-4 h-4 ml-2 group-hover:translate-x-0.5 transition-transform"
                   aria-hidden="true"
                 />
+              </a>
+            </Button>
+            <Button asChild variant="outline" size="lg" className="group">
+              <a href="/login">
+                Log in
+                <LogIn className="w-4 h-4 ml-2" aria-hidden="true" />
               </a>
             </Button>
             <Button asChild variant="outline" size="lg" className="group">

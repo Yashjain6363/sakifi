@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { LogIn, Sparkles } from "lucide-react";
+import { LogIn, Sparkles, UserPlus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SectionLabel } from "@/components/shared/SectionLabel";
 import { GlowOrb } from "@/components/shared/GlowOrb";
@@ -13,7 +13,7 @@ export function GetStarted() {
   return (
     <section
       id="get-started"
-      aria-label="Sign in to SakhiFi"
+      aria-label="Sign up or log in to SakhiFi"
       className="relative py-28 overflow-hidden"
     >
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-rose-950/10 to-obsidian-DEFAULT" />
@@ -42,29 +42,32 @@ export function GetStarted() {
               variants={fadeUpVariants}
               className="text-white/50 text-lg font-light leading-relaxed"
             >
-              Log in with a magic link (verified through Supabase). Right after,
-              Sakhi asks a few questions so money and wellness tips fit you —
-              including cycle-aware support when you want it.
+              Sign up with email and a password, verify your inbox, then finish a
+              short Sakhi chat — money and wellness tips tailored to you, including
+              optional cycle-aware support.
             </motion.p>
           </div>
 
           <motion.div variants={fadeUpVariants} className="flex flex-col sm:flex-row gap-3 justify-center">
             <Button asChild size="lg" className="group">
-              <Link href="/login">
-                <LogIn className="w-4 h-4 mr-2" aria-hidden />
-                Log in with email
+              <Link href="/signup">
+                <UserPlus className="w-4 h-4 mr-2" aria-hidden />
+                Create account
                 <Sparkles className="w-4 h-4 ml-2 group-hover:animate-spin" aria-hidden />
               </Link>
             </Button>
             <Button asChild variant="outline" size="lg">
-              <Link href="/login?next=/onboarding">Go to onboarding</Link>
+              <Link href="/login">
+                <LogIn className="w-4 h-4 mr-2" aria-hidden />
+                Log in
+              </Link>
             </Button>
           </motion.div>
 
           <motion.p variants={fadeUpVariants} className="text-white/30 text-xs leading-relaxed max-w-md mx-auto">
-            New here? Use the same button — we&apos;ll email you a link to create your
-            account. Enable email confirmation in the Supabase Auth settings for
-            verification.
+            Prefer no password? On the log-in page you can use a one-time magic link
+            instead. Turn on email confirmation in Supabase Auth for verified
+            sign-ups.
           </motion.p>
         </motion.div>
       </div>

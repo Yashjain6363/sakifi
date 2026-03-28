@@ -53,12 +53,15 @@ export function Navbar() {
         </div>
 
         {/* Desktop CTA */}
-        <div className="hidden lg:flex items-center gap-3">
+        <div className="hidden lg:flex items-center gap-2">
+          <Button asChild variant="ghost" size="sm" className="text-white/70">
+            <Link href="/signup">Sign up</Link>
+          </Button>
           <Button asChild size="sm">
-            <a href="/login">
+            <Link href="/login">
               Log in
               <LogIn className="w-3.5 h-3.5 ml-1.5" aria-hidden="true" />
-            </a>
+            </Link>
           </Button>
         </div>
 
@@ -94,12 +97,17 @@ export function Navbar() {
                   {item.label}
                 </a>
               ))}
-              <div className="pt-4">
+              <div className="pt-4 flex flex-col gap-2">
                 <Button asChild size="lg" className="w-full">
-                  <a href="/login" onClick={() => setIsOpen(false)}>
+                  <Link href="/signup" onClick={() => setIsOpen(false)}>
+                    Sign up
+                  </Link>
+                </Button>
+                <Button asChild variant="outline" size="lg" className="w-full">
+                  <Link href="/login" onClick={() => setIsOpen(false)}>
                     Log in
                     <LogIn className="w-4 h-4 ml-2" aria-hidden="true" />
-                  </a>
+                  </Link>
                 </Button>
               </div>
             </div>

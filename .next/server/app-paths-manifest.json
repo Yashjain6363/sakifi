@@ -2,6 +2,7 @@
   "/_not-found": "app/_not-found.js",
   "/page": "app/page.js",
   "/auth/callback/route": "app/auth/callback/route.js",
+  "/signup/page": "app/signup/page.js",
   "/login/page": "app/login/page.js",
   "/onboarding/page": "app/onboarding/page.js"
 }

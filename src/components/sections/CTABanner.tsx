@@ -56,9 +56,14 @@ export function CTABanner() {
             className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2"
           >
             <Button asChild size="lg" className="group text-base px-8">
-              <a href="/login">
-                Log in free
+              <a href="/signup">
+                Sign up free
                 <Sparkles className="w-4 h-4 ml-2 group-hover:animate-spin" aria-hidden="true" />
+              </a>
+            </Button>
+            <Button asChild variant="outline" size="lg" className="group text-base px-8">
+              <a href="/login">
+                Log in
               </a>
             </Button>
             <Button asChild variant="outline" size="lg" className="group text-base px-8">
