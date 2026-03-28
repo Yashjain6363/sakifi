@@ -1,8 +1,9 @@
 {
   "/_not-found": "app/_not-found.js",
-  "/page": "app/page.js",
   "/auth/callback/route": "app/auth/callback/route.js",
+  "/page": "app/page.js",
   "/signup/page": "app/signup/page.js",
+  "/onboarding/page": "app/onboarding/page.js",
   "/login/page": "app/login/page.js",
-  "/onboarding/page": "app/onboarding/page.js"
+  "/api/chat/route": "app/api/chat/route.js"
 }

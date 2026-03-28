@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { inter, calSans } from "@/lib/fonts";
 import { SITE_CONFIG } from "@/lib/constants";
+import { SakhiChatbot } from "@/components/chat/SakhiChatbot";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -95,6 +96,7 @@ export default function RootLayout({
           Skip to main content
         </a>
         {children}
+        <SakhiChatbot />
       </body>
     </html>
   );
