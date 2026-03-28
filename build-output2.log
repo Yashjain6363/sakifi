@@ -1,0 +1,941 @@
+﻿
+> sakhifi@0.1.0 build
+> next build
+
+   Γû▓ Next.js 14.1.3
+
+   Creating an optimized production build ...
+node.exe : Failed to 
+load font file: D:\sakh
+ifi\public\fonts\CalSan
+s-SemiBold.woff2
+At line:1 char:1
++ & "C:\Program 
+Files\nodejs/node.exe" 
+"C:\Users\yashs\AppData
+\Roaming\ ...
++ ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~
+~~
+    + CategoryInfo     
+         : NotSpecifi  
+  ed: (Failed to loa   
+ d ...-SemiBold.wof    
+f2:String) [], Rem    
+oteException
+    + FullyQualifiedEr 
+   rorId : NativeComm  
+  andError
+ 
+Error: Unknown font 
+format
+Failed to load font 
+file: D:\sakhifi\public
+\fonts\CalSans-SemiBold
+.woff2
+Error: Unknown font 
+format
+ Γ£ô Compiled successfully
+   Linting and checking validity of types ...
+
+Failed to compile.
+
+./src/actions/waitlist.
+ts
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-unused-vars' 
+was not found.  @typesc
+ript-eslint/no-unused-v
+ars
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-explicit-any' 
+was not found.  @typesc
+ript-eslint/no-explicit
+-any
+36:5  Warning: 
+Unexpected console 
+statement.  no-console
+
+./src/app/api/waitlist/
+route.ts
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-unused-vars' 
+was not found.  @typesc
+ript-eslint/no-unused-v
+ars
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-explicit-any' 
+was not found.  @typesc
+ript-eslint/no-explicit
+-any
+70:5  Warning: 
+Unexpected console 
+statement.  no-console
+
+./src/app/layout.tsx
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-unused-vars' 
+was not found.  @typesc
+ript-eslint/no-unused-v
+ars
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-explicit-any' 
+was not found.  @typesc
+ript-eslint/no-explicit
+-any
+
+./src/app/not-found.tsx
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-unused-vars' 
+was not found.  @typesc
+ript-eslint/no-unused-v
+ars
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-explicit-any' 
+was not found.  @typesc
+ript-eslint/no-explicit
+-any
+11:26  Error: `'` can 
+be escaped with 
+`&apos;`, `&lsquo;`, 
+`&#39;`, `&rsquo;`.  re
+act/no-unescaped-entiti
+es
+11:39  Error: `'` can 
+be escaped with 
+`&apos;`, `&lsquo;`, 
+`&#39;`, `&rsquo;`.  re
+act/no-unescaped-entiti
+es
+
+./src/app/page.tsx
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-unused-vars' 
+was not found.  @typesc
+ript-eslint/no-unused-v
+ars
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-explicit-any' 
+was not found.  @typesc
+ript-eslint/no-explicit
+-any
+
+./src/components/layout
+/Footer.tsx
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-unused-vars' 
+was not found.  @typesc
+ript-eslint/no-unused-v
+ars
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-explicit-any' 
+was not found.  @typesc
+ript-eslint/no-explicit
+-any
+123:109  Error: `'` 
+can be escaped with 
+`&apos;`, `&lsquo;`, 
+`&#39;`, `&rsquo;`.  re
+act/no-unescaped-entiti
+es
+
+./src/components/layout
+/Navbar.tsx
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-unused-vars' 
+was not found.  @typesc
+ript-eslint/no-unused-v
+ars
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-explicit-any' 
+was not found.  @typesc
+ript-eslint/no-explicit
+-any
+
+./src/components/sectio
+ns/Comparison.tsx
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-unused-vars' 
+was not found.  @typesc
+ript-eslint/no-unused-v
+ars
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-explicit-any' 
+was not found.  @typesc
+ript-eslint/no-explicit
+-any
+
+./src/components/sectio
+ns/Contact.tsx
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-unused-vars' 
+was not found.  @typesc
+ript-eslint/no-unused-v
+ars
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-explicit-any' 
+was not found.  @typesc
+ript-eslint/no-explicit
+-any
+39:17  Error: `'` can 
+be escaped with 
+`&apos;`, `&lsquo;`, 
+`&#39;`, `&rsquo;`.  re
+act/no-unescaped-entiti
+es
+45:26  Error: `'` can 
+be escaped with 
+`&apos;`, `&lsquo;`, 
+`&#39;`, `&rsquo;`.  re
+act/no-unescaped-entiti
+es
+
+./src/components/sectio
+ns/FAQ.tsx
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-unused-vars' 
+was not found.  @typesc
+ript-eslint/no-unused-v
+ars
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-explicit-any' 
+was not found.  @typesc
+ript-eslint/no-explicit
+-any
+
+./src/components/sectio
+ns/Features.tsx
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-unused-vars' 
+was not found.  @typesc
+ript-eslint/no-unused-v
+ars
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-explicit-any' 
+was not found.  @typesc
+ript-eslint/no-explicit
+-any
+
+./src/components/sectio
+ns/FinancialLiteracy.ts
+x
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-unused-vars' 
+was not found.  @typesc
+ript-eslint/no-unused-v
+ars
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-explicit-any' 
+was not found.  @typesc
+ript-eslint/no-explicit
+-any
+
+./src/components/sectio
+ns/GoalsSavings.tsx
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-unused-vars' 
+was not found.  @typesc
+ript-eslint/no-unused-v
+ars
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-explicit-any' 
+was not found.  @typesc
+ript-eslint/no-explicit
+-any
+
+./src/components/sectio
+ns/Hero.tsx
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-unused-vars' 
+was not found.  @typesc
+ript-eslint/no-unused-v
+ars
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-explicit-any' 
+was not found.  @typesc
+ript-eslint/no-explicit
+-any
+
+./src/components/sectio
+ns/HowItWorks.tsx
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-unused-vars' 
+was not found.  @typesc
+ript-eslint/no-unused-v
+ars
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-explicit-any' 
+was not found.  @typesc
+ript-eslint/no-explicit
+-any
+
+./src/components/sectio
+ns/Problem.tsx
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-unused-vars' 
+was not found.  @typesc
+ript-eslint/no-unused-v
+ars
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-explicit-any' 
+was not found.  @typesc
+ript-eslint/no-explicit
+-any
+76:28  Error: `'` can 
+be escaped with 
+`&apos;`, `&lsquo;`, 
+`&#39;`, `&rsquo;`.  re
+act/no-unescaped-entiti
+es
+
+./src/components/sectio
+ns/ScamShield.tsx
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-unused-vars' 
+was not found.  @typesc
+ript-eslint/no-unused-v
+ars
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-explicit-any' 
+was not found.  @typesc
+ript-eslint/no-explicit
+-any
+41:27  Error: `'` can 
+be escaped with 
+`&apos;`, `&lsquo;`, 
+`&#39;`, `&rsquo;`.  re
+act/no-unescaped-entiti
+es
+59:19  Error: `"` can 
+be escaped with 
+`&quot;`, `&ldquo;`, 
+`&#34;`, `&rdquo;`.  re
+act/no-unescaped-entiti
+es
+59:40  Error: `'` can 
+be escaped with 
+`&apos;`, `&lsquo;`, 
+`&#39;`, `&rsquo;`.  re
+act/no-unescaped-entiti
+es
+60:88  Error: `"` can 
+be escaped with 
+`&quot;`, `&ldquo;`, 
+`&#34;`, `&rdquo;`.  re
+act/no-unescaped-entiti
+es
+
+./src/components/sectio
+ns/SmartBudgeting.tsx
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-unused-vars' 
+was not found.  @typesc
+ript-eslint/no-unused-v
+ars
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-explicit-any' 
+was not found.  @typesc
+ript-eslint/no-explicit
+-any
+66:26  Error: `'` can 
+be escaped with 
+`&apos;`, `&lsquo;`, 
+`&#39;`, `&rsquo;`.  re
+act/no-unescaped-entiti
+es
+120:76  Error: `'` can 
+be escaped with 
+`&apos;`, `&lsquo;`, 
+`&#39;`, `&rsquo;`.  re
+act/no-unescaped-entiti
+es
+
+./src/components/sectio
+ns/Solution.tsx
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-unused-vars' 
+was not found.  @typesc
+ript-eslint/no-unused-v
+ars
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-explicit-any' 
+was not found.  @typesc
+ript-eslint/no-explicit
+-any
+42:24  Error: `'` can 
+be escaped with 
+`&apos;`, `&lsquo;`, 
+`&#39;`, `&rsquo;`.  re
+act/no-unescaped-entiti
+es
+42:55  Error: `'` can 
+be escaped with 
+`&apos;`, `&lsquo;`, 
+`&#39;`, `&rsquo;`.  re
+act/no-unescaped-entiti
+es
+
+./src/components/sectio
+ns/Testimonials.tsx
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-unused-vars' 
+was not found.  @typesc
+ript-eslint/no-unused-v
+ars
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-explicit-any' 
+was not found.  @typesc
+ript-eslint/no-explicit
+-any
+67:21  Error: `"` can 
+be escaped with 
+`&quot;`, `&ldquo;`, 
+`&#34;`, `&rdquo;`.  re
+act/no-unescaped-entiti
+es
+67:41  Error: `"` can 
+be escaped with 
+`&quot;`, `&ldquo;`, 
+`&#34;`, `&rdquo;`.  re
+act/no-unescaped-entiti
+es
+
+./src/components/sectio
+ns/TrustBar.tsx
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-unused-vars' 
+was not found.  @typesc
+ript-eslint/no-unused-v
+ars
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-explicit-any' 
+was not found.  @typesc
+ript-eslint/no-explicit
+-any
+
+./src/components/sectio
+ns/Waitlist.tsx
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-unused-vars' 
+was not found.  @typesc
+ript-eslint/no-unused-v
+ars
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-explicit-any' 
+was not found.  @typesc
+ript-eslint/no-explicit
+-any
+99:22  Error: `'` can 
+be escaped with 
+`&apos;`, `&lsquo;`, 
+`&#39;`, `&rsquo;`.  re
+act/no-unescaped-entiti
+es
+102:41  Error: `'` can 
+be escaped with 
+`&apos;`, `&lsquo;`, 
+`&#39;`, `&rsquo;`.  re
+act/no-unescaped-entiti
+es
+235:23  Error: `'` can 
+be escaped with 
+`&apos;`, `&lsquo;`, 
+`&#39;`, `&rsquo;`.  re
+act/no-unescaped-entiti
+es
+
+./src/components/sectio
+ns/WomenFirst.tsx
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-unused-vars' 
+was not found.  @typesc
+ript-eslint/no-unused-v
+ars
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-explicit-any' 
+was not found.  @typesc
+ript-eslint/no-explicit
+-any
+
+./src/components/shared
+/AnimatedCounter.tsx
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-unused-vars' 
+was not found.  @typesc
+ript-eslint/no-unused-v
+ars
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-explicit-any' 
+was not found.  @typesc
+ript-eslint/no-explicit
+-any
+
+./src/components/shared
+/GlowOrb.tsx
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-unused-vars' 
+was not found.  @typesc
+ript-eslint/no-unused-v
+ars
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-explicit-any' 
+was not found.  @typesc
+ript-eslint/no-explicit
+-any
+
+./src/components/shared
+/GradientText.tsx
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-unused-vars' 
+was not found.  @typesc
+ript-eslint/no-unused-v
+ars
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-explicit-any' 
+was not found.  @typesc
+ript-eslint/no-explicit
+-any
+
+./src/components/shared
+/GridBackground.tsx
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-unused-vars' 
+was not found.  @typesc
+ript-eslint/no-unused-v
+ars
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-explicit-any' 
+was not found.  @typesc
+ript-eslint/no-explicit
+-any
+
+./src/components/shared
+/MagneticButton.tsx
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-unused-vars' 
+was not found.  @typesc
+ript-eslint/no-unused-v
+ars
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-explicit-any' 
+was not found.  @typesc
+ript-eslint/no-explicit
+-any
+
+./src/components/shared
+/NoiseTexture.tsx
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-unused-vars' 
+was not found.  @typesc
+ript-eslint/no-unused-v
+ars
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-explicit-any' 
+was not found.  @typesc
+ript-eslint/no-explicit
+-any
+
+./src/components/shared
+/ScrollProgress.tsx
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-unused-vars' 
+was not found.  @typesc
+ript-eslint/no-unused-v
+ars
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-explicit-any' 
+was not found.  @typesc
+ript-eslint/no-explicit
+-any
+
+./src/components/shared
+/SectionLabel.tsx
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-unused-vars' 
+was not found.  @typesc
+ript-eslint/no-unused-v
+ars
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-explicit-any' 
+was not found.  @typesc
+ript-eslint/no-explicit
+-any
+
+./src/components/three/
+FinancialOrb.tsx
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-unused-vars' 
+was not found.  @typesc
+ript-eslint/no-unused-v
+ars
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-explicit-any' 
+was not found.  @typesc
+ript-eslint/no-explicit
+-any
+
+./src/components/three/
+NeuralNetwork.tsx
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-unused-vars' 
+was not found.  @typesc
+ript-eslint/no-unused-v
+ars
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-explicit-any' 
+was not found.  @typesc
+ript-eslint/no-explicit
+-any
+
+./src/components/three/
+ParticleField.tsx
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-unused-vars' 
+was not found.  @typesc
+ript-eslint/no-unused-v
+ars
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-explicit-any' 
+was not found.  @typesc
+ript-eslint/no-explicit
+-any
+
+./src/components/three/
+SceneWrapper.tsx
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-unused-vars' 
+was not found.  @typesc
+ript-eslint/no-unused-v
+ars
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-explicit-any' 
+was not found.  @typesc
+ript-eslint/no-explicit
+-any
+
+./src/components/ui/bad
+ge.tsx
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-unused-vars' 
+was not found.  @typesc
+ript-eslint/no-unused-v
+ars
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-explicit-any' 
+was not found.  @typesc
+ript-eslint/no-explicit
+-any
+
+./src/components/ui/but
+ton.tsx
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-unused-vars' 
+was not found.  @typesc
+ript-eslint/no-unused-v
+ars
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-explicit-any' 
+was not found.  @typesc
+ript-eslint/no-explicit
+-any
+
+./src/components/ui/dia
+log.tsx
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-unused-vars' 
+was not found.  @typesc
+ript-eslint/no-unused-v
+ars
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-explicit-any' 
+was not found.  @typesc
+ript-eslint/no-explicit
+-any
+
+./src/components/ui/inp
+ut.tsx
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-unused-vars' 
+was not found.  @typesc
+ript-eslint/no-unused-v
+ars
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-explicit-any' 
+was not found.  @typesc
+ript-eslint/no-explicit
+-any
+
+./src/components/ui/lab
+el.tsx
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-unused-vars' 
+was not found.  @typesc
+ript-eslint/no-unused-v
+ars
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-explicit-any' 
+was not found.  @typesc
+ript-eslint/no-explicit
+-any
+
+./src/components/ui/tex
+tarea.tsx
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-unused-vars' 
+was not found.  @typesc
+ript-eslint/no-unused-v
+ars
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-explicit-any' 
+was not found.  @typesc
+ript-eslint/no-explicit
+-any
+
+./src/hooks/useInView.t
+s
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-unused-vars' 
+was not found.  @typesc
+ript-eslint/no-unused-v
+ars
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-explicit-any' 
+was not found.  @typesc
+ript-eslint/no-explicit
+-any
+
+./src/hooks/useMagnetic
+Effect.ts
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-unused-vars' 
+was not found.  @typesc
+ript-eslint/no-unused-v
+ars
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-explicit-any' 
+was not found.  @typesc
+ript-eslint/no-explicit
+-any
+
+./src/hooks/useReducedM
+otion.ts
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-unused-vars' 
+was not found.  @typesc
+ript-eslint/no-unused-v
+ars
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-explicit-any' 
+was not found.  @typesc
+ript-eslint/no-explicit
+-any
+
+./src/hooks/useScrollPr
+ogress.ts
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-unused-vars' 
+was not found.  @typesc
+ript-eslint/no-unused-v
+ars
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-explicit-any' 
+was not found.  @typesc
+ript-eslint/no-explicit
+-any
+
+./src/lib/animations.ts
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-unused-vars' 
+was not found.  @typesc
+ript-eslint/no-unused-v
+ars
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-explicit-any' 
+was not found.  @typesc
+ript-eslint/no-explicit
+-any
+
+./src/lib/constants.ts
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-unused-vars' 
+was not found.  @typesc
+ript-eslint/no-unused-v
+ars
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-explicit-any' 
+was not found.  @typesc
+ript-eslint/no-explicit
+-any
+
+./src/lib/fonts.ts
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-unused-vars' 
+was not found.  @typesc
+ript-eslint/no-unused-v
+ars
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-explicit-any' 
+was not found.  @typesc
+ript-eslint/no-explicit
+-any
+
+./src/lib/security.ts
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-unused-vars' 
+was not found.  @typesc
+ript-eslint/no-unused-v
+ars
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-explicit-any' 
+was not found.  @typesc
+ript-eslint/no-explicit
+-any
+
+./src/lib/utils.ts
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-unused-vars' 
+was not found.  @typesc
+ript-eslint/no-unused-v
+ars
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-explicit-any' 
+was not found.  @typesc
+ript-eslint/no-explicit
+-any
+
+./src/lib/validations.t
+s
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-unused-vars' 
+was not found.  @typesc
+ript-eslint/no-unused-v
+ars
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-explicit-any' 
+was not found.  @typesc
+ript-eslint/no-explicit
+-any
+
+./src/types/index.ts
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-unused-vars' 
+was not found.  @typesc
+ript-eslint/no-unused-v
+ars
+1:1  Error: Definition 
+for rule '@typescript-e
+slint/no-explicit-any' 
+was not found.  @typesc
+ript-eslint/no-explicit
+-any
+
+info  - Need to 
+disable some ESLint 
+rules? Learn more 
+here: https://nextjs.or
+g/docs/basic-features/e
+slint#disabling-rules

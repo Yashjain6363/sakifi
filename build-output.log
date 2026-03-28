@@ -1,0 +1,54 @@
+﻿
+> sakhifi@0.1.0 build
+> next build
+
+node.exe : 
+At line:1 char:1
++ & "C:\Program 
+Files\nodejs/node.exe" 
+"C:\Users\yashs\AppData
+\Roaming\ ...
++ ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~
+~~
+    + CategoryInfo     
+         : NotSpecifi  
+  ed: (:String) [],    
+ RemoteException
+    + FullyQualifiedEr 
+   rorId : NativeComm  
+  andError
+ 
+> Build error occurred
+Error: Configuring 
+Next.js via 
+'next.config.ts' is 
+not supported. Please 
+replace the file with 
+'next.config.js' or 
+'next.config.mjs'.
+    at loadConfig (D:\s
+akhifi\node_modules\nex
+t\dist\server\config.js
+:783:19)
+    at async 
+Span.traceAsyncFn (D:\s
+akhifi\node_modules\nex
+t\dist\trace\trace.js:1
+51:20)
+    at async D:\sakhifi
+\node_modules\next\dist
+\build\index.js:378:28
+    at async 
+Span.traceAsyncFn (D:\s
+akhifi\node_modules\nex
+t\dist\trace\trace.js:1
+51:20)
+    at async build (D:\
+sakhifi\node_modules\ne
+xt\dist\build\index.js:
+373:9)
+    at async main (D:\s
+akhifi\node_modules\nex
+t\dist\bin\next:155:5)

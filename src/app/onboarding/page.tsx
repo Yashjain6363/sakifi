@@ -1,0 +1,52 @@
+import type { Metadata } from "next";
+import { redirect } from "next/navigation";
+import { OnboardingChat } from "./OnboardingChat";
+import { createClient } from "@/lib/supabase/server";
+import { SITE_CONFIG } from "@/lib/constants";
+
+export const dynamic = "force-dynamic";
+
+export const metadata: Metadata = {
+  title: "Your profile",
+  description: `Personalize ${SITE_CONFIG.name} in a few steps.`,
+};
+
+export default async function OnboardingPage() {
+  if (
+    !process.env.NEXT_PUBLIC_SUPABASE_URL ||
+    !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+  ) {
+    redirect("/login?error=config");
+  }
+
+  const supabase = createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    redirect("/login?next=/onboarding");
+  }
+
+  return (
+    <main className="min-h-[100dvh] px-4 py-24 bg-obsidian-DEFAULT relative overflow-hidden">
+      <div
+        className="absolute inset-0 bg-gradient-to-b from-violet-950/15 via-transparent to-rose-950/10 pointer-events-none"
+        aria-hidden
+      />
+      <div className="relative max-w-3xl mx-auto text-center mb-10 space-y-2">
+        <p className="text-xs font-semibold uppercase tracking-wider text-violet-300/90">
+          Welcome{user.email ? `, ${user.email.split("@")[0]}` : ""}
+        </p>
+        <h1 className="font-display text-3xl sm:text-4xl font-semibold text-white">
+          Let Sakhi learn your rhythm
+        </h1>
+        <p className="text-white/45 text-sm max-w-md mx-auto">
+          A short, private chat so budgeting and wellness nudges match how you
+          actually feel — whether you track cycles or not.
+        </p>
+      </div>
+      <OnboardingChat />
+    </main>
+  );
+}

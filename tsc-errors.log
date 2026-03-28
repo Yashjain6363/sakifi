@@ -1,0 +1,15 @@
+﻿sakhifi/src/app/page.tsx(7,10): error TS2786: 'Image' cannot be used as a JSX component.
+  Its type 'ForwardRefExoticComponent<Omit<DetailedHTMLProps<ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement>, "height" | ... 5 more ... | "srcSet"> & { ...; } & RefAttributes<...>>' is not a valid JSX element type.
+    Type 'ForwardRefExoticComponent<Omit<DetailedHTMLProps<ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement>, "height" | ... 5 more ... | "srcSet"> & { ...; } & RefAttributes<...>>' is not assignable to type '(props: any, deprecatedLegacyContext?: any) => ReactNode'.
+      Type 'import("D:/sakhifi/sakhifi/node_modules/@types/react/index").ReactNode' is not assignable to type 'React.ReactNode'.
+        Type 'ReactElement<unknown, string | JSXElementConstructor<any>>' is not assignable to type 'ReactNode'.
+          Property 'children' is missing in type 'ReactElement<unknown, string | JSXElementConstructor<any>>' but required in type 'ReactPortal'.
+sakhifi/src/app/page.tsx(44,14): error TS2786: 'Image' cannot be used as a JSX component.
+  Its type 'ForwardRefExoticComponent<Omit<DetailedHTMLProps<ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement>, "height" | ... 5 more ... | "srcSet"> & { ...; } & RefAttributes<...>>' is not a valid JSX element type.
+    Type 'ForwardRefExoticComponent<Omit<DetailedHTMLProps<ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement>, "height" | ... 5 more ... | "srcSet"> & { ...; } & RefAttributes<...>>' is not assignable to type '(props: any, deprecatedLegacyContext?: any) => ReactNode'.
+      Type 'import("D:/sakhifi/sakhifi/node_modules/@types/react/index").ReactNode' is not assignable to type 'React.ReactNode'.
+        Type 'ReactElement<unknown, string | JSXElementConstructor<any>>' is not assignable to type 'ReactNode'.
+          Property 'children' is missing in type 'ReactElement<unknown, string | JSXElementConstructor<any>>' but required in type 'ReactPortal'.
+src/components/three/FinancialOrb.tsx(24,11): error TS2322: Type 'RefObject<Material & { distort: number; speed: number; }>' is not assignable to type 'LegacyRef<DistortMaterialImpl> | undefined'.
+  Type 'RefObject<Material & { distort: number; speed: number; }>' is not assignable to type 'RefObject<DistortMaterialImpl>'.
+    Type 'Material & { distort: number; speed: number; }' is missing the following properties from type 'DistortMaterialImpl': _time, _distort, _radius, time, and 62 more.
