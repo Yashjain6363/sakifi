@@ -11,7 +11,7 @@ type Role = "user" | "assistant";
 type ChatMessage = { role: Role; content: string };
 
 const WELCOME_TEXT =
-  "Hi, I’m Sakhi. Ask me about budgeting, saving, or money stress — or how you’re feeling around your cycle, mood, and cravings. I’ll suggest kind, budget-friendly ideas (this isn’t medical advice).";
+  "Hi, I’m Sakhi (on-device mode — no API key). Ask about budgeting, SIPs, scams, emergency funds, or periods and cravings. I’ll keep answers short and India-relevant (not medical advice).";
 
 export function SakhiChatbot() {
   const [open, setOpen] = useState(false);
@@ -56,17 +56,14 @@ export function SakhiChatbot() {
       try {
         data = raw ? (JSON.parse(raw) as { reply?: string; error?: string }) : {};
       } catch {
-        setError(
-          "Server returned an invalid response. If you’re on Vercel Hobby, the AI step may be hitting the ~10s limit — upgrade or set GEMINI_MODEL=gemini-1.5-flash."
-        );
+        setError("Server returned an invalid response. Try again in a moment.");
         setMessages((prev) => prev.slice(0, -1));
         return;
       }
 
       if (!res.ok) {
         setError(
-          data.error ??
-            `Request failed (${res.status}). Check Vercel logs and that GEMINI_API_KEY is set for Production.`
+          data.error ?? `Request failed (${res.status}). Try again shortly.`
         );
         setMessages((prev) => prev.slice(0, -1));
         return;
@@ -87,7 +84,7 @@ export function SakhiChatbot() {
           String(e.message).includes("Failed to fetch"));
       setError(
         isTypeFetch
-          ? "Could not reach the server (Failed to fetch). Try: disable ad-blockers for this site, confirm the deployment finished, and set GEMINI_API_KEY on Vercel then redeploy. Mixed http/https or a blocked /api route can also cause this."
+          ? "Could not reach the server (Failed to fetch). Check your connection, ad-blockers, and that the site URL matches your deployment (http vs https)."
           : "Network error. Check your connection."
       );
       setMessages((prev) => prev.slice(0, -1));

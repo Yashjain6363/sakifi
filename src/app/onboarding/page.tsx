@@ -12,7 +12,11 @@ export const metadata: Metadata = {
   description: `Personalize ${SITE_CONFIG.name} in a few steps.`,
 };
 
-export default async function OnboardingPage() {
+export default async function OnboardingPage({
+  searchParams,
+}: {
+  searchParams: { edit?: string };
+}) {
   const { url: sbUrl, key: sbKey } = getSupabasePublicEnv();
   if (!isValidSupabaseEnv(sbUrl, sbKey)) {
     redirect("/login?error=config");
@@ -42,8 +46,11 @@ export default async function OnboardingPage() {
     "profileComplete" in ob &&
     (ob as { profileComplete?: boolean }).profileComplete === true;
 
-  if (onboardingDone) {
-    redirect("/?welcome=1");
+  const allowRerun =
+    searchParams.edit === "1" || searchParams.edit === "true";
+
+  if (onboardingDone && !allowRerun) {
+    redirect("/dashboard");
   }
 
   const greetingName =

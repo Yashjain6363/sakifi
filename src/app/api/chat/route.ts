@@ -1,12 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
-import { GoogleGenerativeAI } from "@google/generative-ai";
 import { z } from "zod";
-import { SAKHI_CHAT_SYSTEM_INSTRUCTION } from "@/lib/sakhi-chat-prompt";
+import { localSakhiReply, type ChatTurn } from "@/lib/sakhi-local-reply";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
-/** Vercel Pro+: allows longer Gemini calls. Hobby is still capped (~10s). */
-export const maxDuration = 60;
 
 const messageSchema = z.object({
   role: z.enum(["user", "assistant"]),
@@ -21,9 +18,7 @@ function sanitizeText(s: string): string {
   return s.replace(/\0/g, "").trim().slice(0, 4000);
 }
 
-function validateAlternatingUserEnds(
-  messages: z.infer<typeof bodySchema>["messages"]
-): boolean {
+function validateAlternatingUserEnds(messages: ChatTurn[]): boolean {
   if (messages.length === 0) return false;
   if (messages[0].role !== "user") return false;
   if (messages[messages.length - 1].role !== "user") return false;
@@ -34,47 +29,7 @@ function validateAlternatingUserEnds(
   return true;
 }
 
-function normalizeSecret(v: string | undefined): string {
-  if (!v) return "";
-  let s = v.replace(/^\uFEFF/, "").trim();
-  if (
-    (s.startsWith('"') && s.endsWith('"')) ||
-    (s.startsWith("'") && s.endsWith("'"))
-  ) {
-    s = s.slice(1, -1).trim();
-  }
-  return s;
-}
-
-/** Prefer env override, then current widely available IDs (Google renames/retires these periodically). */
-const GEMINI_MODEL_FALLBACKS = [
-  "gemini-2.0-flash",
-  "gemini-1.5-flash",
-  "gemini-2.5-flash-preview-05-20",
-] as const;
-
-function modelCandidates(preferred: string | undefined): string[] {
-  const first = preferred?.trim();
-  const chain = [first, ...GEMINI_MODEL_FALLBACKS].filter(
-    (m): m is string => Boolean(m)
-  );
-  return [...new Set(chain)];
-}
-
 export async function POST(request: NextRequest) {
-  const apiKey = normalizeSecret(process.env.GEMINI_API_KEY);
-  const preferredModel = normalizeSecret(process.env.GEMINI_MODEL);
-
-  if (!apiKey) {
-    return NextResponse.json(
-      {
-        error:
-          "Chat is not configured. Add GEMINI_API_KEY in Vercel → Settings → Environment Variables (Production), then redeploy.",
-      },
-      { status: 503 }
-    );
-  }
-
   let body: unknown;
   try {
     body = await request.json();
@@ -85,13 +40,13 @@ export async function POST(request: NextRequest) {
   const parsed = bodySchema.safeParse(body);
   if (!parsed.success) {
     return NextResponse.json(
-      { error: parsed.error.errors[0]?.message ?? "Invalid request" },
+      { error: parsed.error.issues[0]?.message ?? "Invalid request" },
       { status: 422 }
     );
   }
 
   const { messages } = parsed.data;
-  const cleaned = messages.map((m) => ({
+  const cleaned: ChatTurn[] = messages.map((m) => ({
     role: m.role,
     content: sanitizeText(m.content),
   }));
@@ -107,61 +62,10 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  const lastUser = cleaned[cleaned.length - 1].content;
-  const history = cleaned.slice(0, -1).map((m) => ({
-    role: m.role === "assistant" ? ("model" as const) : ("user" as const),
-    parts: [{ text: m.content }],
-  }));
+  const reply = localSakhiReply(cleaned);
 
-  const genAI = new GoogleGenerativeAI(apiKey);
-  const modelsToTry = modelCandidates(preferredModel || undefined);
-  let lastError: unknown;
-
-  for (const modelId of modelsToTry) {
-    try {
-      const model = genAI.getGenerativeModel({
-        model: modelId,
-        systemInstruction: SAKHI_CHAT_SYSTEM_INSTRUCTION,
-      });
-
-      const chat = model.startChat({ history });
-      const result = await chat.sendMessage(lastUser);
-      const text = result.response.text();
-
-      if (!text?.trim()) {
-        lastError = new Error("Empty model response");
-        continue;
-      }
-
-      return NextResponse.json(
-        { reply: text.trim() },
-        { headers: { "Cache-Control": "no-store" } }
-      );
-    } catch (e) {
-      lastError = e;
-      const msg = e instanceof Error ? e.message : "";
-      const isModelMissing =
-        /404|not found|not supported|invalid model|does not exist|ListModels/i.test(
-          msg
-        );
-      if (isModelMissing) {
-        console.warn(`[api/chat] model ${modelId} unavailable, trying next`);
-        continue;
-      }
-      break;
-    }
-  }
-
-  const msg =
-    lastError instanceof Error ? lastError.message : "Chat failed";
-  console.error("[api/chat]", msg, { tried: modelsToTry });
   return NextResponse.json(
-    {
-      error:
-        /404|not found|not supported|invalid model/i.test(msg)
-          ? `No working Gemini model found. Tried: ${modelsToTry.join(", ")}. In Google AI Studio, open a model that works with your key and set GEMINI_MODEL to that exact id, then redeploy.`
-          : "Something went wrong. Try again in a moment.",
-    },
-    { status: 502 }
+    { reply },
+    { headers: { "Cache-Control": "no-store" } }
   );
 }

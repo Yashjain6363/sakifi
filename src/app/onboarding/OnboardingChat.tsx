@@ -252,7 +252,7 @@ export function OnboardingChat() {
       setSaveMsg(data.message ?? "Saved.");
       router.refresh();
       setTimeout(() => {
-        router.push("/?welcome=1");
+        router.push("/dashboard?welcome=1");
       }, 1200);
     } catch {
       setSaveMsg("Network error.");
@@ -540,7 +540,7 @@ export function OnboardingChat() {
             <motion.div key="done" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} className="space-y-5 text-center">
               {bubble(saveMsg || "Saved. Taking you home…", true)}
               <Button asChild size="lg" className="w-full">
-                <Link href="/">Open home</Link>
+                <Link href="/dashboard">Open dashboard</Link>
               </Button>
             </motion.div>
           )}

@@ -3,10 +3,11 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, LogIn } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { NAV_ITEMS, SITE_CONFIG } from "@/lib/constants";
 import { cn } from "@/lib/utils";
+import { NavAuthButtons } from "@/components/layout/NavAuthButtons";
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -54,15 +55,7 @@ export function Navbar() {
 
         {/* Desktop CTA */}
         <div className="hidden lg:flex items-center gap-2">
-          <Button asChild variant="ghost" size="sm" className="text-white/70">
-            <Link href="/signup">Sign up</Link>
-          </Button>
-          <Button asChild size="sm">
-            <Link href="/login">
-              Log in
-              <LogIn className="w-3.5 h-3.5 ml-1.5" aria-hidden="true" />
-            </Link>
-          </Button>
+          <NavAuthButtons />
         </div>
 
         {/* Mobile menu button */}
@@ -97,19 +90,7 @@ export function Navbar() {
                   {item.label}
                 </a>
               ))}
-              <div className="pt-4 flex flex-col gap-2">
-                <Button asChild size="lg" className="w-full">
-                  <Link href="/signup" onClick={() => setIsOpen(false)}>
-                    Sign up
-                  </Link>
-                </Button>
-                <Button asChild variant="outline" size="lg" className="w-full">
-                  <Link href="/login" onClick={() => setIsOpen(false)}>
-                    Log in
-                    <LogIn className="w-4 h-4 ml-2" aria-hidden="true" />
-                  </Link>
-                </Button>
-              </div>
+              <NavAuthButtons mobile onClickLink={() => setIsOpen(false)} />
             </div>
           </motion.div>
         )}
