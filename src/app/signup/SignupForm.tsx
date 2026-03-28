@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { createBrowserSupabase } from "@/lib/supabase/client";
+import { SUPABASE_PUBLIC_ENV_HINT } from "@/lib/supabase/env";
 import { signupSchema } from "@/lib/validations";
 
 type Props = { nextPath: string };
@@ -56,9 +57,7 @@ export function SignupForm({ nextPath }: Props) {
     const supabase = createBrowserSupabase();
     if (!supabase) {
       setStatus("error");
-      setMessage(
-        "Add real NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY to .env.local"
-      );
+      setMessage(SUPABASE_PUBLIC_ENV_HINT);
       return;
     }
 

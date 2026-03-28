@@ -1,6 +1,7 @@
 import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
+import { getSupabasePublicEnv, isValidSupabaseEnv } from "@/lib/supabase/env";
 
 export async function GET(request: Request) {
   const requestUrl = new URL(request.url);
@@ -8,10 +9,8 @@ export async function GET(request: Request) {
   const next = requestUrl.searchParams.get("next") ?? "/onboarding";
   const origin = requestUrl.origin;
 
-  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-
-  if (!url || !key) {
+  const { url, key } = getSupabasePublicEnv();
+  if (!isValidSupabaseEnv(url, key)) {
     return NextResponse.redirect(`${origin}/login?error=config`);
   }
 

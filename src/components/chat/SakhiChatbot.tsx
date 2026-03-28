@@ -38,9 +38,11 @@ export function SakhiChatbot() {
     setLoading(true);
 
     try {
-      const res = await fetch("/api/chat", {
+      const url = `${window.location.origin}/api/chat`;
+      const res = await fetch(url, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        credentials: "same-origin",
         body: JSON.stringify({
           messages: forApi.map((m) => ({
             role: m.role,
@@ -48,10 +50,24 @@ export function SakhiChatbot() {
           })),
         }),
       });
-      const data = (await res.json()) as { reply?: string; error?: string };
+
+      const raw = await res.text();
+      let data: { reply?: string; error?: string } = {};
+      try {
+        data = raw ? (JSON.parse(raw) as { reply?: string; error?: string }) : {};
+      } catch {
+        setError(
+          "Server returned an invalid response. If you’re on Vercel Hobby, the AI step may be hitting the ~10s limit — upgrade or set GEMINI_MODEL=gemini-1.5-flash."
+        );
+        setMessages((prev) => prev.slice(0, -1));
+        return;
+      }
 
       if (!res.ok) {
-        setError(data.error ?? "Could not reach Sakhi. Try again.");
+        setError(
+          data.error ??
+            `Request failed (${res.status}). Check Vercel logs and that GEMINI_API_KEY is set for Production.`
+        );
         setMessages((prev) => prev.slice(0, -1));
         return;
       }
@@ -62,12 +78,18 @@ export function SakhiChatbot() {
         return;
       }
 
-      setMessages((prev) => [
-        ...prev,
-        { role: "assistant", content: data.reply! },
-      ]);
-    } catch {
-      setError("Network error. Check your connection.");
+      const reply = data.reply as string;
+      setMessages((prev) => [...prev, { role: "assistant", content: reply }]);
+    } catch (e) {
+      const isTypeFetch =
+        e instanceof TypeError &&
+        (String(e.message).includes("fetch") ||
+          String(e.message).includes("Failed to fetch"));
+      setError(
+        isTypeFetch
+          ? "Could not reach the server (Failed to fetch). Try: disable ad-blockers for this site, confirm the deployment finished, and set GEMINI_API_KEY on Vercel then redeploy. Mixed http/https or a blocked /api route can also cause this."
+          : "Network error. Check your connection."
+      );
       setMessages((prev) => prev.slice(0, -1));
     } finally {
       setLoading(false);

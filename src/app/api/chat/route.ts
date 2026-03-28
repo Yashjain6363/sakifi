@@ -5,6 +5,8 @@ import { SAKHI_CHAT_SYSTEM_INSTRUCTION } from "@/lib/sakhi-chat-prompt";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
+/** Vercel Pro+: allows longer Gemini calls. Hobby is still capped (~10s). */
+export const maxDuration = 60;
 
 const messageSchema = z.object({
   role: z.enum(["user", "assistant"]),
@@ -32,15 +34,28 @@ function validateAlternatingUserEnds(
   return true;
 }
 
+function normalizeSecret(v: string | undefined): string {
+  if (!v) return "";
+  let s = v.replace(/^\uFEFF/, "").trim();
+  if (
+    (s.startsWith('"') && s.endsWith('"')) ||
+    (s.startsWith("'") && s.endsWith("'"))
+  ) {
+    s = s.slice(1, -1).trim();
+  }
+  return s;
+}
+
 export async function POST(request: NextRequest) {
-  const apiKey = process.env.GEMINI_API_KEY;
-  const modelId = process.env.GEMINI_MODEL?.trim() || "gemini-2.0-flash";
+  const apiKey = normalizeSecret(process.env.GEMINI_API_KEY);
+  const modelId =
+    normalizeSecret(process.env.GEMINI_MODEL) || "gemini-1.5-flash";
 
   if (!apiKey) {
     return NextResponse.json(
       {
         error:
-          "Chat is not configured. Add GEMINI_API_KEY to .env.local (server-only, never NEXT_PUBLIC).",
+          "Chat is not configured. Add GEMINI_API_KEY in Vercel → Settings → Environment Variables (Production), then redeploy.",
       },
       { status: 503 }
     );

@@ -1,1 +1,1 @@
-{"version":1,"functions":{"/login":{},"/onboarding":{},"/signup":{},"/api/chat":{}}}
+{"version":1,"functions":{"/login":{},"/signup":{},"/onboarding":{},"/api/chat":{"maxDuration":60}}}

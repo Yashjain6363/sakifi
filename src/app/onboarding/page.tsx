@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { OnboardingChat } from "./OnboardingChat";
 import { createClient } from "@/lib/supabase/server";
+import { getSupabasePublicEnv, isValidSupabaseEnv } from "@/lib/supabase/env";
 import { SITE_CONFIG } from "@/lib/constants";
 
 export const dynamic = "force-dynamic";
@@ -12,10 +13,8 @@ export const metadata: Metadata = {
 };
 
 export default async function OnboardingPage() {
-  if (
-    !process.env.NEXT_PUBLIC_SUPABASE_URL ||
-    !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-  ) {
+  const { url: sbUrl, key: sbKey } = getSupabasePublicEnv();
+  if (!isValidSupabaseEnv(sbUrl, sbKey)) {
     redirect("/login?error=config");
   }
 

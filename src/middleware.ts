@@ -1,13 +1,12 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
+import { getSupabasePublicEnv, isValidSupabaseEnv } from "@/lib/supabase/env";
 
 export async function middleware(request: NextRequest) {
   let supabaseResponse = NextResponse.next({ request });
 
-  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-
-  if (!url || !key) {
+  const { url, key } = getSupabasePublicEnv();
+  if (!isValidSupabaseEnv(url, key)) {
     return supabaseResponse;
   }
 
@@ -33,8 +32,10 @@ export async function middleware(request: NextRequest) {
   return supabaseResponse;
 }
 
+/* Skip API routes — running Supabase session refresh on every /api/* call can break
+ * POST handlers on Vercel and cause the browser to show "Failed to fetch". */
 export const config = {
   matcher: [
-    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
+    "/((?!api/|_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
   ],
 };
