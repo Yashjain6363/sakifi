@@ -8,6 +8,12 @@ export type SiteFeatureLink = {
 };
 
 export const SITE_FEATURE_LINKS: SiteFeatureLink[] = [
+  {
+    label: "Budget (signed in)",
+    href: "/dashboard#budget",
+    description: "Expenses, pocket money, charts",
+    icon: "📒",
+  },
   { label: "Hero", href: "/#hero", description: "Overview & CTA", icon: "✨" },
   { label: "Problem & solution", href: "/#problem", description: "Why SakhiFi exists", icon: "💡" },
   { label: "Smart budgeting", href: "/#budgeting", description: "AI budget coach", icon: "💰" },

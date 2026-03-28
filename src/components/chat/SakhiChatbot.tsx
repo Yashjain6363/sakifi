@@ -5,13 +5,14 @@ import { AnimatePresence, motion } from "framer-motion";
 import { MessageCircle, Send, X, Sparkles, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { ChatBudgetQuickAdd } from "@/components/budget/ChatBudgetQuickAdd";
 
 type Role = "user" | "assistant";
 
 type ChatMessage = { role: Role; content: string };
 
 const WELCOME_TEXT =
-  "Hi, I’m Sakhi (on-device mode — no API key). Ask about budgeting, SIPs, scams, emergency funds, or periods and cravings. I’ll keep answers short and India-relevant (not medical advice).";
+  "Hi — I’m Sakhi, your calm coach for money and period education (private, on-device). Use Budget quick add below to log pocket money and expenses when you’re signed in, or ask about budgeting, debt, scams, SIPs, periods, and more — not medical or regulated investment advice.";
 
 export function SakhiChatbot() {
   const [open, setOpen] = useState(false);
@@ -139,6 +140,8 @@ export function SakhiChatbot() {
                   <X className="h-4 w-4" />
                 </button>
               </div>
+
+              <ChatBudgetQuickAdd />
 
               <div
                 ref={scrollRef}

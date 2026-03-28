@@ -7,6 +7,7 @@ import { SITE_CONFIG } from "@/lib/constants";
 import { SITE_FEATURE_LINKS } from "@/lib/dashboard-links";
 import { DashboardWelcomeStrip } from "./DashboardWelcomeStrip";
 import { Navbar } from "@/components/layout/Navbar";
+import { BudgetSection } from "@/components/budget/BudgetSection";
 
 export const dynamic = "force-dynamic";
 
@@ -96,6 +97,8 @@ export default async function DashboardPage({
           </header>
 
           <DashboardWelcomeStrip showWelcome={showWelcome} />
+
+          <BudgetSection />
 
           {!hasReport && (
             <div className="rounded-2xl border border-amber-500/25 bg-amber-950/25 px-4 py-4 text-sm text-amber-100/90">
