@@ -7,8 +7,6 @@ import { Loader2, Mail, UserPlus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { createBrowserSupabase } from "@/lib/supabase/client";
-import { SUPABASE_PUBLIC_ENV_HINT } from "@/lib/supabase/env";
 import { signupSchema } from "@/lib/validations";
 
 type Props = { nextPath: string };
@@ -28,10 +26,6 @@ export function SignupForm({ nextPath }: Props) {
   const [message, setMessage] = useState("");
   const [resending, setResending] = useState(false);
   const [verifyError, setVerifyError] = useState("");
-
-  function callbackUrl() {
-    return `${window.location.origin}/auth/callback?next=${encodeURIComponent(nextPath)}`;
-  }
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -54,68 +48,92 @@ export function SignupForm({ nextPath }: Props) {
       return;
     }
 
-    const supabase = createBrowserSupabase();
-    if (!supabase) {
-      setStatus("error");
-      setMessage(SUPABASE_PUBLIC_ENV_HINT);
-      return;
-    }
-
     setStatus("loading");
     setMessage("");
 
-    const { data, error } = await supabase.auth.signUp({
-      email: parsed.data.email,
-      password: parsed.data.password,
-      options: {
-        emailRedirectTo: callbackUrl(),
-        data: {
-          full_name: parsed.data.fullName ?? "",
-        },
-      },
-    });
+    try {
+      const res = await fetch(`${window.location.origin}/api/auth/signup`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({
+          ...parsed.data,
+          next: nextPath,
+        }),
+      });
 
-    if (error) {
-      setStatus("error");
-      let msg = error.message;
-      if (/already registered|already been registered|exists/i.test(msg)) {
-        msg = "An account with this email already exists. Try logging in instead.";
+      const raw = await res.text();
+      let data: { ok?: boolean; needsEmailConfirmation?: boolean; error?: string | null } =
+        {};
+      try {
+        data = raw ? JSON.parse(raw) : {};
+      } catch {
+        setStatus("error");
+        setMessage("Bad response from server. Redeploy and check Vercel logs.");
+        return;
       }
-      setMessage(msg);
-      return;
-    }
 
-    if (data.session) {
-      router.push(nextPath);
-      router.refresh();
-      return;
-    }
+      if (!res.ok || !data.ok) {
+        setStatus("error");
+        let msg = data.error ?? "Sign up failed.";
+        if (/already registered|already been registered|exists/i.test(msg)) {
+          msg = "An account with this email already exists. Try logging in instead.";
+        }
+        setMessage(msg);
+        return;
+      }
 
-    setVerifyError("");
-    setStatus("verify");
-    setMessage(
-      "We sent a verification link to your email. Open it to confirm your account — then you’ll continue to a few quick questions."
-    );
+      if (!data.needsEmailConfirmation) {
+        router.push(nextPath);
+        router.refresh();
+        return;
+      }
+
+      setVerifyError("");
+      setStatus("verify");
+      setMessage(
+        "We sent a verification link to your email. Open it to confirm your account — then you’ll continue to a few quick questions."
+      );
+    } catch {
+      setStatus("error");
+      setMessage(
+        "Could not reach the server. Check your connection, or confirm the site URL / Supabase env on Vercel."
+      );
+    }
   }
 
   async function resendVerification() {
-    const supabase = createBrowserSupabase();
-    if (!supabase || !email.trim()) return;
+    if (!email.trim()) return;
     setResending(true);
-    const { error } = await supabase.auth.resend({
-      type: "signup",
-      email: email.trim().toLowerCase(),
-      options: { emailRedirectTo: callbackUrl() },
-    });
-    setResending(false);
-    if (error) {
-      setVerifyError(error.message);
-      return;
-    }
     setVerifyError("");
-    setMessage(
-      "Another verification email is on its way. Check spam if you don’t see it."
-    );
+    try {
+      const res = await fetch(`${window.location.origin}/api/auth/resend`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({ email: email.trim().toLowerCase(), next: nextPath }),
+      });
+      const raw = await res.text();
+      let data: { ok?: boolean; error?: string } = {};
+      try {
+        data = raw ? JSON.parse(raw) : {};
+      } catch {
+        setVerifyError("Invalid server response.");
+        setResending(false);
+        return;
+      }
+      if (!res.ok || !data.ok) {
+        setVerifyError(data.error ?? "Could not resend.");
+        setResending(false);
+        return;
+      }
+      setMessage(
+        "Another verification email is on its way. Check spam if you don’t see it."
+      );
+    } catch {
+      setVerifyError("Network error.");
+    }
+    setResending(false);
   }
 
   if (status === "verify") {
@@ -176,8 +194,8 @@ export function SignupForm({ nextPath }: Props) {
           Sign up for SakhiFi
         </h1>
         <p className="text-white/45 text-sm leading-relaxed">
-          Verify your email, then answer a short onboarding chat so Sakhi fits
-          your life.
+          Sign-up runs on our server (works even if the browser can’t read Supabase
+          keys). Verify your email when asked, then finish onboarding.
         </p>
       </div>
 
@@ -269,9 +287,9 @@ export function SignupForm({ nextPath }: Props) {
         </Button>
 
         <p className="text-white/30 text-xs text-center leading-relaxed">
-          With email confirmation on in Supabase, you must click the link in
-          your inbox before your session starts. Redirect URL:{" "}
-          <code className="text-white/45">/auth/callback</code>
+          Add your Vercel URL + <code className="text-white/45">/auth/callback</code>{" "}
+          in Supabase → Authentication → Redirect URLs. Optional: set{" "}
+          <code className="text-white/45">SITE_URL</code> on Vercel for email links.
         </p>
       </form>
 
