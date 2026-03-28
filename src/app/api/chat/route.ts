@@ -46,10 +46,24 @@ function normalizeSecret(v: string | undefined): string {
   return s;
 }
 
+/** Prefer env override, then current widely available IDs (Google renames/retires these periodically). */
+const GEMINI_MODEL_FALLBACKS = [
+  "gemini-2.0-flash",
+  "gemini-1.5-flash",
+  "gemini-2.5-flash-preview-05-20",
+] as const;
+
+function modelCandidates(preferred: string | undefined): string[] {
+  const first = preferred?.trim();
+  const chain = [first, ...GEMINI_MODEL_FALLBACKS].filter(
+    (m): m is string => Boolean(m)
+  );
+  return [...new Set(chain)];
+}
+
 export async function POST(request: NextRequest) {
   const apiKey = normalizeSecret(process.env.GEMINI_API_KEY);
-  const modelId =
-    normalizeSecret(process.env.GEMINI_MODEL) || "gemini-1.5-flash";
+  const preferredModel = normalizeSecret(process.env.GEMINI_MODEL);
 
   if (!apiKey) {
     return NextResponse.json(
@@ -99,39 +113,55 @@ export async function POST(request: NextRequest) {
     parts: [{ text: m.content }],
   }));
 
-  try {
-    const genAI = new GoogleGenerativeAI(apiKey);
-    const model = genAI.getGenerativeModel({
-      model: modelId,
-      systemInstruction: SAKHI_CHAT_SYSTEM_INSTRUCTION,
-    });
+  const genAI = new GoogleGenerativeAI(apiKey);
+  const modelsToTry = modelCandidates(preferredModel || undefined);
+  let lastError: unknown;
 
-    const chat = model.startChat({ history });
-    const result = await chat.sendMessage(lastUser);
-    const text = result.response.text();
+  for (const modelId of modelsToTry) {
+    try {
+      const model = genAI.getGenerativeModel({
+        model: modelId,
+        systemInstruction: SAKHI_CHAT_SYSTEM_INSTRUCTION,
+      });
 
-    if (!text?.trim()) {
+      const chat = model.startChat({ history });
+      const result = await chat.sendMessage(lastUser);
+      const text = result.response.text();
+
+      if (!text?.trim()) {
+        lastError = new Error("Empty model response");
+        continue;
+      }
+
       return NextResponse.json(
-        { error: "No response from model. Try again or check GEMINI_MODEL." },
-        { status: 502 }
+        { reply: text.trim() },
+        { headers: { "Cache-Control": "no-store" } }
       );
+    } catch (e) {
+      lastError = e;
+      const msg = e instanceof Error ? e.message : "";
+      const isModelMissing =
+        /404|not found|not supported|invalid model|does not exist|ListModels/i.test(
+          msg
+        );
+      if (isModelMissing) {
+        console.warn(`[api/chat] model ${modelId} unavailable, trying next`);
+        continue;
+      }
+      break;
     }
-
-    return NextResponse.json(
-      { reply: text.trim() },
-      { headers: { "Cache-Control": "no-store" } }
-    );
-  } catch (e) {
-    const msg = e instanceof Error ? e.message : "Chat failed";
-    console.error("[api/chat]", msg);
-    return NextResponse.json(
-      {
-        error:
-          msg.includes("404") || msg.includes("not found")
-            ? `Model "${modelId}" may be unavailable. Set GEMINI_MODEL to gemini-1.5-flash in .env.local.`
-            : "Something went wrong. Try again in a moment.",
-      },
-      { status: 502 }
-    );
   }
+
+  const msg =
+    lastError instanceof Error ? lastError.message : "Chat failed";
+  console.error("[api/chat]", msg, { tried: modelsToTry });
+  return NextResponse.json(
+    {
+      error:
+        /404|not found|not supported|invalid model/i.test(msg)
+          ? `No working Gemini model found. Tried: ${modelsToTry.join(", ")}. In Google AI Studio, open a model that works with your key and set GEMINI_MODEL to that exact id, then redeploy.`
+          : "Something went wrong. Try again in a moment.",
+    },
+    { status: 502 }
+  );
 }

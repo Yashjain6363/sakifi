@@ -33,13 +33,14 @@ export default async function OnboardingPage() {
     .eq("id", user.id)
     .maybeSingle();
 
+  const ob = profile?.onboarding;
   const onboardingDone =
     !profileError &&
-    profile?.onboarding &&
-    typeof profile.onboarding === "object" &&
-    profile.onboarding !== null &&
-    !Array.isArray(profile.onboarding) &&
-    "gender" in profile.onboarding;
+    ob &&
+    typeof ob === "object" &&
+    !Array.isArray(ob) &&
+    "profileComplete" in ob &&
+    (ob as { profileComplete?: boolean }).profileComplete === true;
 
   if (onboardingDone) {
     redirect("/?welcome=1");

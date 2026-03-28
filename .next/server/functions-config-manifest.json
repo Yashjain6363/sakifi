@@ -1,1 +1,1 @@
-{"version":1,"functions":{"/api/auth/login":{},"/api/auth/otp":{},"/api/auth/resend":{},"/api/auth/signup":{},"/login":{},"/signup":{},"/onboarding":{},"/api/chat":{"maxDuration":60}}}
+{"version":1,"functions":{"/api/auth/otp":{},"/api/auth/login":{},"/login":{},"/api/auth/resend":{},"/api/chat":{"maxDuration":60},"/signup":{},"/onboarding":{},"/api/auth/signup":{}}}

@@ -5,9 +5,9 @@
   "/api/auth/login/route": "app/api/auth/login/route.js",
   "/api/auth/otp/route": "app/api/auth/otp/route.js",
   "/api/auth/resend/route": "app/api/auth/resend/route.js",
-  "/login/page": "app/login/page.js",
-  "/signup/page": "app/signup/page.js",
-  "/onboarding/page": "app/onboarding/page.js",
   "/api/auth/signup/route": "app/api/auth/signup/route.js",
+  "/login/page": "app/login/page.js",
+  "/onboarding/page": "app/onboarding/page.js",
+  "/signup/page": "app/signup/page.js",
   "/api/chat/route": "app/api/chat/route.js"
 }

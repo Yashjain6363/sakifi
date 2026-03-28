@@ -56,7 +56,10 @@ const moneyComfort = z.enum([
   "prefer_not_to_say",
 ]);
 
-export const onboardingSchema = z.object({
+const investmentGoal = z.enum(["emergency", "growth", "short_term"]);
+
+/** Client → POST /api/onboarding/save — server adds profileComplete + computed */
+export const onboardingSaveBodySchema = z.object({
   gender: z.enum(["female", "male", "prefer_not_to_say"]),
   female: z
     .object({
@@ -73,6 +76,11 @@ export const onboardingSchema = z.object({
     })
     .optional(),
   moneyComfort: moneyComfort.optional(),
+  /** yyyy-mm-dd if tracking; omit or empty if skipped */
+  lastPeriodDate: z.string().optional(),
+  salaryMonthlyInr: z.number().min(0).max(5_000_000),
+  sipMonthlyInr: z.number().min(0).max(500_000),
+  investmentGoal: investmentGoal,
 });
 
-export type OnboardingPayload = z.infer<typeof onboardingSchema>;
+export type OnboardingSaveBody = z.infer<typeof onboardingSaveBodySchema>;
